@@ -9,34 +9,37 @@ p The object is to be the first player to form in their hand a "full house": one
     .player-text Cartas PC
     .table
         .card.card__b
-            img(src="", alt="carta 1" id='pc1')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='pc1')
         .card.card__a
-            img(src="", alt="carta 1" id='pc2')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='pc2')
         .card.card__c
-            img(src="", alt="carta 1" id='pc3')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='pc3')
         .card.card__d
-            img(src="", alt="carta 1" id='pc4')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='pc4')
         .card.card__e
-            img(src="", alt="carta 1" id='pc5')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='pc5')
     .table
         .deck(id='deck')
-            img(src="/img/back.jpg", alt="card-selected")
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="card-deck" id='deck-img')
+        .options(id='options') Do you want to change the card ?
+            br 
+            button(id='continue') Next turn
         .selected(id='trash')
-            img(src="", alt="card-selected" id='selected')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="card-selected" id='selected')
     .player-text Jugador
     .table
         .card.card__b
-            img(src="", alt="carta 1" id='my1')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='my1' data-id=0)
         .card.card__a
-            img(src="", alt="carta 1" id='my2')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='my2' data-id=1)
         .card.card__c
-            img(src="", alt="carta 1" id='my3')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='my3' data-id=2)
         .card.card__d
-            img(src="", alt="carta 1" id='my4')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='my4' data-id=3)
         .card.card__e
-            img(src="", alt="carta 1" id='my5')
+            img(src="https://cdn4.iconfinder.com/data/icons/developer-set-3/128/code-512.png", alt="carta 1" id='my5' data-id=4)
     .message
-        h3.win Has Ganado!
-        h3.lose Has Perdido :(
+        //- h3.win Has Ganado!
+        //- h3.lose Has Perdido :(
 .footer
     p Creado por Walter Díaz

@@ -1,13 +1,22 @@
-document.getElementById("start").addEventListener("click", startGame);
-document.getElementById("deck").addEventListener("click", takeCard);
-document.getElementById("trash").addEventListener("click", startGame);
-
 let cards = [];
 let pcCards = [];
 let myCards = [];
 let trash = [];
 let selectedCard = "";
-let cardTaken = false;
+let takenCard = null;
+let player = false;
+
+document.getElementById("start").addEventListener("click", startGame);
+document.getElementById("deck").addEventListener("click", takeCard);
+document.getElementById("continue").addEventListener("click", passTurn);
+
+document.getElementById("my1").addEventListener("click", changeCard);
+document.getElementById("my2").addEventListener("click", changeCard);
+document.getElementById("my3").addEventListener("click", changeCard);
+document.getElementById("my4").addEventListener("click", changeCard);
+document.getElementById("my5").addEventListener("click", changeCard);
+
+var log = document.getElementById("log");
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -27,20 +36,20 @@ function shuffle(array) {
 }
 
 function restart() {
-  let cards = [];
-  let pcCards = [];
-  let myCards = [];
-  let trash = [];
-  let selectedCard = "";
-  let cardTaken = false;
+  cards = [];
+  pcCards = [];
+  myCards = [];
+  trash = [];
+  takenCard = null;
+  player = false;
+  document.getElementById("deck-img").src = "../img/back.jpg";
+  cards = shuffle(cardsRepository);
 }
 
 function startGame() {
   //Inicializar  variables
   restart();
-  document.getElementById("log").innerHTML =
-    "Iniciando juego repartiendo cartas";
-  cards = shuffle(cardsRepository);
+  log.innerHTML = "Iniciando juego repartiendo cartas";
   while (pcCards.length < 5) {
     let card = cards.shift();
     pcCards.push(card);
@@ -49,10 +58,6 @@ function startGame() {
     let card = cards.shift();
     myCards.push(card);
   }
-  console.log(pcCards);
-  console.log(myCards);
-  console.log(cards.length);
-  console.log(cardsRepository.length);
   updateImages();
 }
 
@@ -62,14 +67,17 @@ function takeCard() {
     let card = cards.shift();
     document.getElementById("selected").src = card.image;
     console.log(card, cards.length);
-    document.getElementById("log").innerHTML = `Has sacado la carta ${card.suit} ${card.value}`;
+    takenCard = card;
+    log.innerHTML = `Has sacado la carta ${card.suit} ${card.value}`;
+    player = true;
   } else {
-    document.getElementById("log").innerHTML = `No hay cartas`;
+    log.innerHTML = `No hay cartas`;
   }
 }
 
 function updateImages() {
   // Asignacion de imagenes
+
   document.getElementById("my1").src = myCards[0]["image"];
   document.getElementById("my2").src = myCards[1]["image"];
   document.getElementById("my3").src = myCards[2]["image"];
@@ -89,18 +97,101 @@ function updateImages() {
   document.getElementById("pc5").src = pcCards[4]["image"];
 }
 
+function passTurn() {
+  log.innerHTML = `Continua PC`;
+  player = false;
+  setTimeout(() => {
+    takeCard();
+    setTimeout(() => ia(), 2000);
+  }, 2000);
+}
+
 function changeCard() {
-  //actualizar card Taken
   //actualizar cartas tomadas
+  let position = this.dataset.id;
+  if (player) {
+    let temp = myCards[position];
+    myCards[position] = takenCard;
+    takenCard = temp;
+    document.getElementById("selected").src = takenCard.image;
+    log.innerHTML = `Cambiaste la carta ${takenCard.suit} ${takenCard.value} por ${myCards[position].suit} ${myCards[position].value}`;
+    updateImages();
+    winValidation();
+  } else {
+    alert("No puedes cambiar");
+  }
 }
 
 function winValidation() {
-  if (true) {
-    //Si se repiten 3 y 2 cartas Mostrar mensaje de Win
+  let cAce = myCards.filter((r) => r.value === "ACE").length;
+  let c2 = myCards.filter((r) => r.value === "2").length;
+  let c3 = myCards.filter((r) => r.value === "3").length;
+  let c4 = myCards.filter((r) => r.value === "4").length;
+  let c5 = myCards.filter((r) => r.value === "5").length;
+  let c6 = myCards.filter((r) => r.value === "6").length;
+  let c7 = myCards.filter((r) => r.value === "7").length;
+  let c8 = myCards.filter((r) => r.value === "8").length;
+  let c9 = myCards.filter((r) => r.value === "9").length;
+  let c10 = myCards.filter((r) => r.value === "10").length;
+  let cJack = myCards.filter((r) => r.value === "JACK").length;
+  let cQueen = myCards.filter((r) => r.value === "QUEEN").length;
+  let cKing = myCards.filter((r) => r.value === "KING").length;
+
+  //Si se repiten 3 y 2 cartas Mostrar mensaje de Win
+  if (
+    (cAce === 3 ||
+      c2 === 3 ||
+      c3 === 3 ||
+      c4 === 3 ||
+      c5 === 3 ||
+      c6 === 3 ||
+      c7 === 3 ||
+      c8 === 3 ||
+      c9 === 3 ||
+      c10 === 3 ||
+      cJack === 3 ||
+      cQueen === 3 ||
+      cKing === 3) &&
+    (cAce === 2 ||
+      c2 === 2 ||
+      c3 === 2 ||
+      c4 === 2 ||
+      c5 === 2 ||
+      c6 === 2 ||
+      c7 === 2 ||
+      c8 === 2 ||
+      c9 === 2 ||
+      c10 === 2 ||
+      cJack === 2 ||
+      cQueen === 2 ||
+      cKing === 2)
+  ) {
+    log.innerHTML = "Ganaste";
   }
 }
 
 function ia() {
+  log.innerHTML = "Aplicando IA [--__--]";
+  setTimeout(() => {
+    let cAce = myCards.filter((r) => r.value === "ACE").length;
+    let c2 = myCards.filter((r) => r.value === "2").length;
+    let c3 = myCards.filter((r) => r.value === "3").length;
+    let c4 = myCards.filter((r) => r.value === "4").length;
+    let c5 = myCards.filter((r) => r.value === "5").length;
+    let c6 = myCards.filter((r) => r.value === "6").length;
+    let c7 = myCards.filter((r) => r.value === "7").length;
+    let c8 = myCards.filter((r) => r.value === "8").length;
+    let c9 = myCards.filter((r) => r.value === "9").length;
+    let cJack = myCards.filter((r) => r.value === "JACK").length;
+    let cQueen = myCards.filter((r) => r.value === "QUEEN").length;
+    let cKing = myCards.filter((r) => r.value === "KING").length;
+    if (false) {
+      log.innerHTML = "Cambio carta, tu turno";
+    } else {
+      log.innerHTML = "No cambio carta, tu turno";
+    }
+  }, 2000);
+
   // Si no tiene carta repetida cambiar esa
   //No hacer cambio de una si tiene 3 repetidas
 }
