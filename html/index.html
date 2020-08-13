@@ -10,32 +10,41 @@
     <script defer src="../scripts/gameLogic.js"></script>
   </head>
   <body>
-    <h1>Juego de cartas 3 y 2</h1>
-    <h2>Instrucciones</h2>
+    <h1>JUEGO CARTAS 3 Y 2</h1>
+    <h2>Introduction</h2>
+    <p>Tres y dos (Spanish for 'three and two') is a simple draw and discard game of the rummy type played in the Dominican Republic. Humbernio Lockward learned it as a child, and writes that most Dominicans who have ever played cards know this game. It would be interesting to know whether it is played in other Spanish speaking countries. At present we do not know any players from elsewhere so it may be that it originates from the Dominican Republic.</p>
+    <h2>Objective</h2>
+    <p>The object is to be the first player to form in their hand a "full house": one triplet of 3 matching cards and one pair of 2 matching cards, such as K-K-K-8-8 or 3-3-3-5-5 (thus the name tres y dos), through the process of draw and discard.</p>
     <div class="container">
-      <button id="start">Iniciar Juego</button>
-      <div class="table">Cartas PC
-        <div class="card card__b"></div>
-        <div class="card card__a"></div>
-        <div class="card card__c"></div>
-        <div class="card card__d"></div>
-        <div class="card card__e"></div>
+      <button id="start">Start Game</button>
+      <div class="log" id="log">Bienvenido</div>
+      <div class="player-text">Cartas PC</div>
+      <div class="table">
+        <div class="card card__b"><img src="" alt="carta 1" id="pc1"></div>
+        <div class="card card__a"><img src="" alt="carta 1" id="pc2"></div>
+        <div class="card card__c"><img src="" alt="carta 1" id="pc3"></div>
+        <div class="card card__d"><img src="" alt="carta 1" id="pc4"></div>
+        <div class="card card__e"><img src="" alt="carta 1" id="pc5"></div>
       </div>
       <div class="table">
-        <div class="deck">Tomar carta</div>
-        <div class="selected">Carta disponible</div>
+        <div class="deck" id="deck"><img src="/img/back.jpg" alt="card-selected"></div>
+        <div class="selected" id="trash"><img src="" alt="card-selected" id="selected"></div>
       </div>
-      <div class="table">Mis cartas
-        <div class="card card__b"></div>
-        <div class="card card__a"></div>
-        <div class="card card__c"></div>
-        <div class="card card__d"></div>
-        <div class="card card__e"></div>
+      <div class="player-text">Jugador</div>
+      <div class="table">
+        <div class="card card__b"><img src="" alt="carta 1" id="my1"></div>
+        <div class="card card__a"><img src="" alt="carta 1" id="my2"></div>
+        <div class="card card__c"><img src="" alt="carta 1" id="my3"></div>
+        <div class="card card__d"><img src="" alt="carta 1" id="my4"></div>
+        <div class="card card__e"><img src="" alt="carta 1" id="my5"></div>
       </div>
-      <div class="x">
-        <h3>Has Ganado!</h3>
-        <h3>Has Perdido :(</h3>
+      <div class="message">
+        <h3 class="win">Has Ganado!</h3>
+        <h3 class="lose">Has Perdido :(</h3>
       </div>
+    </div>
+    <div class="footer">
+      <p>Creado por Walter Díaz</p>
     </div>
   </body>
 </html>
